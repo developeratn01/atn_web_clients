@@ -1,0 +1,28 @@
+@layout('layouts.main')
+
+@section('extracss')
+{{ style('index') }}
+@endsection
+
+@section('title')
+ATN - YO
+@endsection
+
+@section('main')
+
+<div class="container" style="margin-top:3rem">
+    <h1>Información de usuario</h1>
+    <div class="card" style="width: 18rem;">
+        {{--  <img src="user.png" class="card-img-top" alt="user" >  --}}
+        <div class="card-body">
+            <h3 class="card-title"><b>{{user.name}} {{user.first_last_name}}</b></h3>
+            <p class="card-test">{{user.email}}</p>
+            @if(user.promotor)
+                <p class="card-test">{{user.code}}</p>
+            @endif
+        </div>
+    </div>
+</div>
+
+
+@endsection

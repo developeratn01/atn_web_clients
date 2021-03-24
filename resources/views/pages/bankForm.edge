@@ -1,0 +1,110 @@
+@layout('layouts.main')
+
+@section('extracss')
+{{ style('index') }}
+@endsection
+
+@section('title')
+ATN - Bank form
+@endsection
+
+@section('main')
+
+<div class="container" style="margin-top: 3rem;">
+
+    @if(bank)
+        <div class="mx-auto" style="width: 50%; text-align: center; margin-bottom:1rem;">
+            <h1>Editanto info bancaria del cliente: {{ bank.client_id }}</h1>
+        </div>
+            
+        <form action="{{ route('BankController.edit', {id: bank.id} ) }}" method="POST">
+            {{ csrfField() }}
+            <div class="row">
+                {{--clabe--}} 
+                <div class="form-group col-sm">
+                    <label for="clabe">CLABE</label>
+                    <input class="form-control" type="text" name="clabe" value="{{ bank.clabe}}" minlength="18" maxlength="18">
+                    @if(hasErrorFor('clabe'))
+                        <span>
+                            {{ getErrorFor('clabe') }}
+                        </span>
+                    @endif
+                </div>
+                {{--Banco--}} 
+                <div class="form-group col-sm">
+                    <label for="bank">Banco</label>
+                    <input class="form-control" type="text" name="bank" value="{{ bank.bank }}" onkeyup="this.value = this.value.toUpperCase();">
+                    @if(hasErrorFor('bank'))
+                        <span>
+                            {{ getErrorFor('bank') }}
+                        </span>
+                    @endif
+                </div>
+                {{--account--}}    
+                <div class="form-group col-sm">
+                    <label for="account">Cuenta</label>
+                    <input class="form-control" type="text" name="account" value="{{ bank.account }}" minlength="5" maxlength="24">
+                    @if(hasErrorFor('account'))
+                    <span>
+                        {{ getErrorFor('account') }}
+                    </span>
+                @endif
+                </div>                
+            </div>
+              
+            <div class="mx-auto" style="width: 50%; text-align: center;">
+                <button class="btn btn-secondary" type="submit">Guardar</button>
+            </div>
+        </form>
+        
+    @else
+        <div class="mx-auto" style="width: 50%; text-align: center; margin-bottom:1rem;">
+            <h1>Agregar info bancaria</h1>
+        </div>
+
+        <form action="{{ route('BankController.create', {client_id: client_id} ) }}" method="POST">
+            {{ csrfField() }}
+            
+            <div class="row">
+                {{--clabe--}} 
+                <div class="form-group col-sm">
+                    <label for="clabe">CLABE</label>
+                    <input class="form-control" type="text" name="clabe" value="{{ old('clabe', '')}}" minlength="18" maxlength="18">
+                    @if(hasErrorFor('clabe'))
+                        <span>
+                            {{ getErrorFor('clabe') }}
+                        </span>
+                    @endif
+                </div>
+                {{--Banco--}} 
+                <div class="form-group col-sm">
+                    <label for="bank">Banco</label>
+                    <input class="form-control" type="text" name="bank" value="{{ old('bank', '') }}" onkeyup="this.value = this.value.toUpperCase();">
+                    @if(hasErrorFor('bank'))
+                        <span>
+                            {{ getErrorFor('bank') }}
+                        </span>
+                    @endif
+                </div>
+                {{--account--}}    
+                <div class="form-group col-sm">
+                    <label for="account">Cuenta</label>
+                    <input class="form-control" type="text" name="account" value="{{ old('account', '') }}" minlength="5" maxlength="24">
+                    @if(hasErrorFor('account'))
+                    <span>
+                        {{ getErrorFor('account') }}
+                    </span>
+                @endif
+                </div>                
+            </div>                
+                 
+            <div class="mx-auto" style="width: 50%; text-align: center;">
+                <button class="btn btn-secondary" type="submit">Guardar</button>
+            </div>
+        </form>
+    @endif
+
+    
+</div>
+  
+@endsection
