@@ -1,7 +1,6 @@
 # Adonis fullstack application
 
-For exclusive use 
-Acercate a tu nómina
+For Acercate a tu nómina exclusive use 
 
 ## Setup
 install Adonisjs globally first
